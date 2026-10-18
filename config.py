@@ -13,7 +13,7 @@ API_BASE_URL = "http://localhost:1235/v1"
 API_URL = f"{API_BASE_URL}/chat/completions"
 
 # The specific model to use on the LM Studio server
-MODEL_ID = "qwen3.8-27b-turbofcfusion-735-882-here-uncen-neo-coder-max-low-mtp"
+MODEL_ID = "qwen3.8-27b-ud"
 
 # API key from environment variable, empty string if not set (LM Studio default)
 API_KEY = os.getenv("AI_API_KEY", "")
