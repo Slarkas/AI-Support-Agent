@@ -11,6 +11,7 @@ from config import (
     ALLOWED_CATEGORIES,
     ALLOWED_PRIORITIES,
     REQUIRED_FIELDS,
+    validate_response_structure,
 )
 import json
 import urllib.request
@@ -82,21 +83,8 @@ def analyze_ticket_with_llm(message: str) -> dict:
     if not isinstance(parsed, dict):
         raise Exception("Model response is not a JSON object")
 
-    # Validate required fields exist and are non-empty strings
-    for field in REQUIRED_FIELDS:
-        value = parsed.get(field)
-        if not isinstance(value, str) or not value.strip():
-            raise Exception(f"Missing or empty required field: '{field}'")
-
-    # Strip whitespace from values
-    for field in REQUIRED_FIELDS:
-        parsed[field] = parsed[field].strip()
-
-    # Validate category and priority are allowed values
-    if parsed["category"] not in ALLOWED_CATEGORIES:
-        raise Exception(f"Invalid category: '{parsed['category']}'")
-    if parsed["priority"] not in ALLOWED_PRIORITIES:
-        raise Exception(f"Invalid priority: '{parsed['priority']}'")
+    # Use centralized validation helper from config.py
+    validate_response_structure(parsed)
 
     return {
         "category": parsed["category"],
