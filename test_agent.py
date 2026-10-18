@@ -6,7 +6,8 @@ import urllib.request
 import urllib.error
 
 sys.path.insert(0, '.')
-from llm_client import analyze_ticket_with_llm, API_URL, MODEL_ID
+from llm_client import analyze_ticket_with_llm
+from config import API_URL, MODEL_ID
 from main import analyze_ticket
 
 

@@ -21,12 +21,11 @@ try:
     from unittest import mock
 except ImportError:
     mock = None
-# Import LLM client module (provides analyze_ticket_with_llm, API_URL, MODEL_ID)
-from llm_client import (
-    analyze_ticket_with_llm,
-    API_URL,
-    MODEL_ID,
-)
+# Import LLM client module (provides analyze_ticket_with_llm)
+from llm_client import analyze_ticket_with_llm
+
+# Import configuration directly from config.py
+from config import API_URL, MODEL_ID
 
 REQUEST_TIMEOUT = 120
 def analyze_ticket(message: str) -> dict:
