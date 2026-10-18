@@ -21,14 +21,14 @@ try:
     from unittest import mock
 except ImportError:
     mock = None
+# Import LLM client module (provides analyze_ticket_with_llm, API_URL, MODEL_ID)
+from llm_client import (
+    analyze_ticket_with_llm,
+    API_URL,
+    MODEL_ID,
+)
 
-API_URL = "http://localhost:1235/v1/chat/completions"
-MODEL_ID = "qwen3.8-27b-ud"
 REQUEST_TIMEOUT = 120
-
-ALLOWED_CATEGORIES = {"technical_issue", "billing", "order_status", "general"}
-ALLOWED_PRIORITIES = {"high", "medium", "low"}
-REQUIRED_FIELDS = ["category", "priority", "summary", "recommended_action"]
 def analyze_ticket(message: str) -> dict:
     """
     Analyze a support ticket message and return structured results.
